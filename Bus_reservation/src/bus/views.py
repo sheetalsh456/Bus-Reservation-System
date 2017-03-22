@@ -16,6 +16,7 @@ def search_bus(request,template_name ='bus/search_bus.html'):
         post_data = request.POST.copy()
         area_from_id = post_data.get('area_from_id')
         area_to_id = post_data.get('area_to_id') 
+        print area_to_id, area_from_id
         bus_info_list= BusInfo.objects.filter(arriving_from_id=area_from_id,depature_at_id=area_to_id)
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 

@@ -18,8 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('bus.urls')),
-    url(r'^', include('bookTicket.urls')),
-    url(r'^', include('account.urls')),
+    url(r'^', include('bus.urls',namespace='bus')),
+    url(r'^', include('bookTicket.urls',namespace='bookTicket')),
+    url(r'^', include('account.urls',namespace='account')),
     url(r'^account/', include('django.contrib.auth.urls')),
 ]

@@ -62,7 +62,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
                  
-                 'C:/Users/DELL/Desktop/Bus_reservation/src/templates',
+                 '/home/sheetal/Documents/6thSemSubjects/ITA/Bus-Reservation-System/Bus_reservation/src/templates',
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bus_reservation',
         'USER' : 'root',
-        'PASSWORD':'',
+        'PASSWORD':'sheetal',
     }
 }
 

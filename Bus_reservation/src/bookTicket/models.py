@@ -27,6 +27,7 @@ class bookAticket(models.Model):
     fare = models.DecimalField(max_digits=9,decimal_places=2)
     
     class Meta:
+        db_table='bookTicket_bookaticket'
         verbose_name_plural = 'Booked Tickets'
     def __str__(self):
         return 'BUSBK#00'+str(self.id)

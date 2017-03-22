@@ -48,7 +48,7 @@ class BusInfo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='images/bus/main/')
     class Meta:
-        db_table='busrv_busInfo'
+        db_table='busrv_businfo'
         ordering=['-created_at']
     def __str__(self):
         return self.bus_name
