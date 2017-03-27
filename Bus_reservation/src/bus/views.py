@@ -14,10 +14,12 @@ def search_bus(request,template_name ='bus/search_bus.html'):
     
     if request.method == 'POST':
         post_data = request.POST.copy()
-        area_from_id = post_data.get('area_from_id')
-        area_to_id = post_data.get('area_to_id') 
-        print area_to_id, area_from_id
-        bus_info_list= BusInfo.objects.filter(arriving_from_id=area_from_id,depature_at_id=area_to_id)
+        area_from = post_data.get('area_from')
+        area_from_obj = BusPickArea.objects.get(area_name=area_from)
+        area_to = post_data.get('area_to')
+        area_to_obj = BusDropArea.objects.get(area_name=area_to)
+        print area_to_obj.id, area_from_obj.id
+        bus_info_list= BusInfo.objects.filter(arriving_from=area_from_obj,depature_at=area_to_obj)
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
 
 

@@ -7,7 +7,7 @@ class BusPickArea(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table='busrv_busPickArea'
+        db_table='busrv_buspickarea'
         ordering=['-created_at']
     def __str__(self):
         return self.area_name
@@ -19,11 +19,28 @@ class BusDropArea(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table='busrv_busDropArea'
+        db_table='busrv_busdroparea'
         ordering=['-created_at']
     def __str__(self):
         return self.area_name
     
+class BusDropPoint(models.Model):
+    drop_point = models.CharField(max_length=500)
+    pincode = models.IntegerField()
+    area = models.ForeignKey(BusDropArea, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'busrv_busdroppoint'
+
+class BusPickPoint(models.Model):
+    point_name = models.CharField(max_length=500)
+    pincode = models.IntegerField()
+    area = models.ForeignKey(BusPickArea, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'busrv_buspickpoint'
 
 class BusInfo(models.Model):
     #Bus type 

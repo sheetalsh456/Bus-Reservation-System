@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from bus.models import BusInfo
+from bus.models import BusInfo, BusDropPoint, BusPickPoint
 # Create your models here.
 class bookAticket(models.Model):
     #each indivitual status 
@@ -26,8 +26,11 @@ class bookAticket(models.Model):
     booking_seats_num =models.IntegerField(default=1)
     fare = models.DecimalField(max_digits=9,decimal_places=2)
     
+    pickpoint = models.ForeignKey(BusDropPoint, models.DO_NOTHING)
+    droppoint = models.ForeignKey(BusPickPoint, models.DO_NOTHING)
+
     class Meta:
-        db_table='bookTicket_bookaticket'
+        db_table='bookticket_bookaticket'
         verbose_name_plural = 'Booked Tickets'
     def __str__(self):
         return 'BUSBK#00'+str(self.id)

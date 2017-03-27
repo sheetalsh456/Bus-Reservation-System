@@ -5,12 +5,17 @@ from django.http import HttpResponseRedirect
 from django.core import urlresolvers
 from bus.models import BusInfo
 from .models import bookAticket
+from bus.models import BusPickPoint, BusDropPoint
 
 # Create your views here.
 @login_required
 def book_ticket(request,bus_id,template_name='bus/book_ticket_form.html'):
     page_title = 'Book a ticket'
     bus_info = get_object_or_404(BusInfo,id=bus_id)
+    bus_pickup = bus_info.arriving_from
+    bus_drop = bus_info.depature_at
+    bus_pickuppoints = BusPickPoint.objects.filter(area=bus_pickup)
+    bus_droppoints = BusDropPoint.objects.filter(area=bus_drop)
     #get all post data in postdata variable
     postdata=request.POST.copy()
     if request.method == 'POST':
