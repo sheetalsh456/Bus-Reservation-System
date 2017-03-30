@@ -31,6 +31,8 @@ def book_ticket(request,bus_id,template_name='bus/book_ticket_form.html'):
             bookTicket.booking_date = postdata.get('book_date',0)
             bookTicket.bus_id = bus_id
             bookTicket.ip_address = request.META.get('REMOTE_ADDR')
+            bookTicket.pickpoint_id = postdata.get('pickup_id',1)
+            bookTicket.droppoint_id = postdata.get('drop_id',1)
             #save details in the table
             bookTicket.save()
             receipt_url = urlresolvers.reverse('account:my_account')

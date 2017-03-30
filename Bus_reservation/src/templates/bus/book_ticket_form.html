@@ -28,13 +28,13 @@
                                 var directionsService = new google.maps.DirectionsService();
                                 var directionsDisplay = new google.maps.DirectionsRenderer();
 
-                                var map = new google.maps.Map(document.getElementById('map'), {
+                                var map = new google.maps.Map(document.getElementById('map1'), {
                                     zoom:6,
                                     mapTypeId: google.maps.MapTypeId.ROADMAP
                                  });
                             
                                 directionsDisplay.setMap(map);
-                                directionsDisplay.setPanel(document.getElementById('panel'));
+                                //directionsDisplay.setPanel(document.getElementById('panel'));
                         
                                 var request = {
                                     destination: response.originAddresses[originmini], 
@@ -42,6 +42,11 @@
                                     travelMode: google.maps.DirectionsTravelMode.DRIVING
                                 };
                         		console.log(response.originAddresses[originmini]);
+                        		console.log(response.destinationAddresses[0])
+
+                        		document.getElementById('pickup_id').value = originmini + 1;
+               					console.log(originmini + 1);
+
                                 directionsService.route(request, function(response, status) {
                                     if (status == google.maps.DirectionsStatus.OK) {
                                         directionsDisplay.setDirections(response);
@@ -74,6 +79,84 @@
                                     avoidTolls: false
                                 }, 
                                 callback
+                            );
+                        }
+                    </script>
+
+
+    <script type="text/javascript"> 
+    
+                		function callback2(response, status) 
+                        {
+                            if(status=="OK") 
+                            {
+                                var originmin = 1000000;
+                                var originmini = -1; 
+
+                                for(var i = 0; i < response.rows.length; i++)
+                                {
+                                    var a = response.rows[i].elements[0].distance.value;
+                                    if(a < originmin)
+                                    {
+                                        originmin = a;
+                                        originmini = i;
+                                    }
+                                    console.log(a + "->" + response.originAddresses[i]);
+                                }
+                                var directionsService = new google.maps.DirectionsService();
+                                var directionsDisplay = new google.maps.DirectionsRenderer();
+
+                                var map = new google.maps.Map(document.getElementById('map2'), {
+                                    zoom:6,
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                 });
+                            
+                                directionsDisplay.setMap(map);
+                                //directionsDisplay.setPanel(document.getElementById('panel'));
+                        
+                                var request = {
+                                    origin: response.originAddresses[originmini], 
+                                    destination: response.destinationAddresses[0],
+                                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                                };
+                        		console.log(response.originAddresses[originmini]);
+                        		console.log(response.destinationAddresses[0])
+
+                        		document.getElementById('drop_id').value = originmini + 1;
+               					console.log(originmini + 1);
+
+                                directionsService.route(request, function(response, status) {
+                                    if (status == google.maps.DirectionsStatus.OK) {
+                                        directionsDisplay.setDirections(response);
+                                    }
+                                });
+                            } 
+                            else 
+                            {
+                                    alert("Error: " + status);
+                            }
+                        }
+
+                        function initMap2()
+                        {
+                            var distanceService = new google.maps.DistanceMatrixService();
+                            var origins = [];
+                            {% for point in bus_droppoints %}
+                            	pc = {{point.pincode}};
+                            	origins.push(pc.toString());
+                            {% endfor %}
+                            console.log(origins);
+                            var destination = document.getElementById('drop_pincode').value;
+                            console.log(destination);
+                            distanceService.getDistanceMatrix(
+                                {
+                                    origins: origins,
+                                    destinations: [destination],
+                                    travelMode: google.maps.TravelMode.DRIVING,
+                                    avoidHighways: false,
+                                    avoidTolls: false
+                                }, 
+                                callback2
                             );
                         }
                     </script>
@@ -119,6 +202,8 @@
 						  </tr>
 						  
 						  </table>
+
+						  
 						</div>
 						  <div class="col-xs-6">
 						  <form method='POST'action=".">
@@ -156,13 +241,14 @@
 									<div class="form-group col-xs-9">
 								      	<label for="pickup_pincode">Pick Up Pincode:</label>
 								     	<input type="text" name="pickup_pincode" pattern="[0-9]{6}" placeholder="Please enter your pickup pincode." id="pickup_pincode"  class="form-control input-sm" onchange="initMap()"required/>
-								     	
+								     	<input type="hidden" name="pickup_id" id="pickup_id"  value="1" class="form-control input-sm"/>
 								    </div>
 								 </div>
 								 <div class="row">
 									<div class="form-group col-xs-9">
 								      	<label for="drop_pincode">Drop Pincode:</label>
-								     	<input type="text" name="drop_pincode" pattern="[0-9]{6}" placeholder="Please enter your drop pincode." id="drop_pincode"  class="form-control input-sm" required/>
+								     	<input type="text" name="drop_pincode" pattern="[0-9]{6}" placeholder="Please enter your drop pincode." id="drop_pincode"  class="form-control input-sm" onchange="initMap2()" required/>
+								     	<input type="hidden" name="drop_id" id="drop_id"  value="1" class="form-control input-sm"/>
 								    </div>
 								 </div>
 								  <div class="row">
@@ -171,11 +257,9 @@
 									 </div>
 								</div>
 								</form>
-
-								<div style="width: 1000px;">
-                     				<div id="map" style="width: 650px; height: 400px; float: left;"></div> 
-                     				<div id="panel" style="width: 350px; float: right;"></div> 
-                				</div>
+                				<div style="width: 500px;">
+                     				 
+                     			</div>
 								<div class="row">
 									<div class=" col-xs-9">
 										 <table class="table table-bordered" >
@@ -192,7 +276,10 @@
 									 </div>
 								</div>
 								 </div>
-						  
+						  	<div style="width: 1050px;">
+                     				<div id="map1" style="width: 500px; height: 400px; float: left;"></div> 
+                     				<div id="map2" style="width: 500px; height: 400px; float: right;"></div>
+                     		</div>
 						  </div>
 						  
 						  

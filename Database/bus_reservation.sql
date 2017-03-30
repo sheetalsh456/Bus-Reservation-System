@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 09:43 PM
--- Server version: 5.6.14
--- PHP Version: 5.5.6
+-- Host: localhost
+-- Generation Time: Mar 30, 2017 at 03:14 PM
+-- Server version: 5.7.17-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `bus_reservation`
@@ -26,12 +26,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `auth_group`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL,
+  `name` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -39,14 +37,11 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
 -- Table structure for table `auth_group_permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_group_permissions_group_id_0cd325b0_uniq` (`group_id`,`permission_id`),
-  KEY `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -54,14 +49,12 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
 -- Table structure for table `auth_permission`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `content_type_id` int(11) NOT NULL,
-  `codename` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+  `codename` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `auth_permission`
@@ -105,8 +98,8 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- Table structure for table `auth_user`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL,
   `password` varchar(128) NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
@@ -116,10 +109,8 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
   `email` varchar(254) NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
-  `date_joined` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `date_joined` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `auth_user`
@@ -129,7 +120,8 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 (1, 'pbkdf2_sha256$24000$6f63EyYtOwBp$Q8xRFwAn+Vo6EGoP9eoHNIEqJlX9oC/LiGNrmW45iIY=', '2016-03-24 14:51:30.970934', 1, 'bus_admin', '', '', 'bus@gmail.com', 1, 1, '2016-03-11 19:21:56.105143'),
 (2, 'pbkdf2_sha256$24000$KyetaLZWY0Uw$GQLJV0yz33MfPWQbRSBqVWvTlcoA1+TffG6RMEGqJv0=', '2016-03-19 20:49:02.590413', 0, 'andy', '', '', '', 0, 1, '2016-03-17 17:50:56.807446'),
 (3, 'pbkdf2_sha256$24000$1NjzqqWkc4Ed$t+aGlg7EVsIEocTn+R994W8JOFIktmYgluYNikoWtws=', '2016-03-17 17:53:27.229433', 0, 'niki', '', '', '', 0, 1, '2016-03-17 17:53:26.437388'),
-(4, 'pbkdf2_sha256$24000$jK3YRS8uu9nP$prrQ5ONDLaxyFOACFOFrTrOm3NNQ9dQZ3cUL0YBtmxw=', '2016-03-20 16:26:05.177169', 0, 'nikichiki', '', '', '', 0, 1, '2016-03-19 15:09:30.251371');
+(4, 'pbkdf2_sha256$24000$jK3YRS8uu9nP$prrQ5ONDLaxyFOACFOFrTrOm3NNQ9dQZ3cUL0YBtmxw=', '2016-03-20 16:26:05.177169', 0, 'nikichiki', '', '', '', 0, 1, '2016-03-19 15:09:30.251371'),
+(5, 'pbkdf2_sha256$24000$ydddzsp1xW7P$9N/k9s6Cw7v/RsHSl+pefwJo1bwrcz51mpEGX8DSz28=', '2017-03-22 13:53:13.064043', 0, 'sheetal', '', '', '', 0, 1, '2017-03-22 13:53:12.895859');
 
 -- --------------------------------------------------------
 
@@ -137,14 +129,11 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 -- Table structure for table `auth_user_groups`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_user_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_user_groups_user_id_94350c0c_uniq` (`user_id`,`group_id`),
-  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `group_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -152,14 +141,11 @@ CREATE TABLE IF NOT EXISTS `auth_user_groups` (
 -- Table structure for table `auth_user_user_permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_user_user_permissions_user_id_14a6b632_uniq` (`user_id`,`permission_id`),
-  KEY `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` (`permission_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -167,8 +153,8 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
 -- Table structure for table `bookticket_bookaticket`
 --
 
-CREATE TABLE IF NOT EXISTS `bookticket_bookaticket` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bookticket_bookaticket` (
+  `id` int(11) NOT NULL,
   `booking_date` datetime(6) NOT NULL,
   `status` varchar(2) NOT NULL,
   `ip_address` char(39) NOT NULL,
@@ -180,20 +166,21 @@ CREATE TABLE IF NOT EXISTS `bookticket_bookaticket` (
   `fare` decimal(9,2) NOT NULL,
   `bus_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `bookTicket_bookaticket_bus_id_7f7e68e1_fk_busrv_busInfo_id` (`bus_id`),
-  KEY `bookTicket_bookaticket_user_id_398ddaae_fk_auth_user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `pickpoint_id` int(11) NOT NULL,
+  `droppoint_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bookticket_bookaticket`
 --
 
-INSERT INTO `bookticket_bookaticket` (`id`, `booking_date`, `status`, `ip_address`, `last_updated`, `date`, `email`, `phone`, `booking_seats_num`, `fare`, `bus_id`, `user_id`) VALUES
-(1, '2016-03-17 18:30:00.000000', 'P', '127.0.0.1', '2016-03-17 17:14:08.402827', '2016-03-17 17:14:08.402827', 'aniruddha@gmail.com', '9978675678', 4, '500.00', 2, 1),
-(2, '2016-03-17 18:30:00.000000', 'C', '127.0.0.1', '2016-03-19 15:57:29.083906', '2016-03-17 17:21:10.925255', 'aniruddha@gmail.com', '9948584235', 5, '500.00', 2, 1),
-(3, '2016-03-25 18:30:00.000000', 'P', '127.0.0.1', '2016-03-19 20:43:54.148685', '2016-03-19 20:43:54.148685', 'niki@gmail.com', '9945654565', 2, '300.00', 1, 4),
-(4, '2016-03-20 18:30:00.000000', 'C', '127.0.0.1', '2016-03-20 16:25:48.154196', '2016-03-20 16:21:15.411596', 'nikimadgirl@item.com', '9920755049', 3, '300.00', 1, 4);
+INSERT INTO `bookticket_bookaticket` (`id`, `booking_date`, `status`, `ip_address`, `last_updated`, `date`, `email`, `phone`, `booking_seats_num`, `fare`, `bus_id`, `user_id`, `pickpoint_id`, `droppoint_id`) VALUES
+(1, '2016-03-17 18:30:00.000000', 'P', '127.0.0.1', '2016-03-17 17:14:08.402827', '2016-03-17 17:14:08.402827', 'aniruddha@gmail.com', '9978675678', 4, '500.00', 2, 1, 1, 2),
+(2, '2016-03-17 18:30:00.000000', 'C', '127.0.0.1', '2016-03-19 15:57:29.083906', '2016-03-17 17:21:10.925255', 'aniruddha@gmail.com', '9948584235', 5, '500.00', 2, 1, 1, 1),
+(3, '2016-03-25 18:30:00.000000', 'P', '127.0.0.1', '2016-03-19 20:43:54.148685', '2016-03-19 20:43:54.148685', 'niki@gmail.com', '9945654565', 2, '300.00', 1, 4, 1, 1),
+(4, '2016-03-20 18:30:00.000000', 'C', '127.0.0.1', '2016-03-20 16:25:48.154196', '2016-03-20 16:21:15.411596', 'nikimadgirl@item.com', '9920755049', 3, '300.00', 1, 4, 1, 2),
+(5, '2017-03-23 00:00:00.000000', 'P', '127.0.0.1', '2017-03-22 13:56:33.085649', '2017-03-22 13:56:33.085726', 'sheetal@asdf.com', '9535125744', 1, '500.00', 2, 5, 1, 2),
+(6, '2017-12-31 00:00:00.000000', 'P', '127.0.0.1', '2017-03-30 09:01:21.662239', '2017-03-30 09:01:21.662277', 'sheetal@asdf.com', '9535125744', 4, '500.00', 2, 5, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -201,23 +188,45 @@ INSERT INTO `bookticket_bookaticket` (`id`, `booking_date`, `status`, `ip_addres
 -- Table structure for table `busrv_busdroparea`
 --
 
-CREATE TABLE IF NOT EXISTS `busrv_busdroparea` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `busrv_busdroparea` (
+  `id` int(11) NOT NULL,
   `area_name` varchar(50) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `busrv_busdroparea`
 --
 
 INSERT INTO `busrv_busdroparea` (`id`, `area_name`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Karjat', 'karjat', '2016-03-11 19:26:45.624703', '2016-03-11 19:26:45.624703'),
-(2, 'Swargate(pune)', 'swargatepune', '2016-03-11 19:27:06.075873', '2016-03-11 19:27:06.075873');
+(1, 'Bangalore', 'bangalore', '2016-03-11 19:26:45.624703', '2016-03-11 19:26:45.624703');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `busrv_busdroppoint`
+--
+
+CREATE TABLE `busrv_busdroppoint` (
+  `id` int(11) NOT NULL,
+  `drop_point` varchar(500) NOT NULL,
+  `pincode` int(6) NOT NULL,
+  `area_id` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `busrv_busdroppoint`
+--
+
+INSERT INTO `busrv_busdroppoint` (`id`, `drop_point`, `pincode`, `area_id`) VALUES
+(1, 'Mahadevpura', 560048, 1),
+(2, 'MG Road', 560001, 1),
+(3, 'Koramangala', 560034, 1),
+(4, 'Yeshwanthpura', 560022, 1),
+(5, 'Indiranagar', 560038, 1),
+(6, 'Hebbal', 560024, 1);
 
 -- --------------------------------------------------------
 
@@ -225,8 +234,8 @@ INSERT INTO `busrv_busdroparea` (`id`, `area_name`, `slug`, `created_at`, `updat
 -- Table structure for table `busrv_businfo`
 --
 
-CREATE TABLE IF NOT EXISTS `busrv_businfo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `busrv_businfo` (
+  `id` int(11) NOT NULL,
   `bus_name` varchar(50) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `bus_description` longtext NOT NULL,
@@ -240,20 +249,16 @@ CREATE TABLE IF NOT EXISTS `busrv_businfo` (
   `updated_at` datetime(6) NOT NULL,
   `image` varchar(100) NOT NULL,
   `arriving_from_id` int(11) NOT NULL,
-  `depature_at_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `slug` (`slug`),
-  KEY `busrv_busInfo_4a888a93` (`arriving_from_id`),
-  KEY `busrv_busInfo_16dac3c0` (`depature_at_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `depature_at_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `busrv_businfo`
 --
 
 INSERT INTO `busrv_businfo` (`id`, `bus_name`, `slug`, `bus_description`, `type`, `arriving_time`, `depature_time`, `fare`, `no_of_seats`, `is_active`, `created_at`, `updated_at`, `image`, `arriving_from_id`, `depature_at_id`) VALUES
-(1, 'Niki Bus Travels', 'niki-bus', 'With online reservation we provide advance booking facilities in our hotels. The hospitality and versatility that we showcase in all our functional areas has made us one of the leading tours & travels companies in India. Every year, we serve millions of travelers. Smiles on their faces are the greatest reward we have ever got.', 'AC', '06:00:00.000000', '18:00:00.000000', '300.00', 43, 1, '2016-03-11 19:35:51.355917', '2016-03-14 18:18:25.710599', 'images/bus/main/volvo1.jpg', 1, 2),
-(2, 'Jyoti travels', 'jyoti-travels', 'A Destination for the New Millennium.\r\nA different light.\r\nA new point of view.\r\nA signature of excellence.\r\nA tradition of excellence.', 'AC', '06:00:00.000000', '12:00:00.000000', '500.00', 50, 1, '2016-03-14 17:07:00.968717', '2016-03-14 18:01:06.644974', 'images/bus/main/1662227372_v1.jpg', 1, 2);
+(1, 'Niki Bus Travels', 'niki-bus', 'With online reservation we provide advance booking facilities in our hotels. The hospitality and versatility that we showcase in all our functional areas has made us one of the leading tours & travels companies in India. Every year, we serve millions of travelers. Smiles on their faces are the greatest reward we have ever got.', 'AC', '06:00:00.000000', '18:00:00.000000', '300.00', 43, 1, '2016-03-11 19:35:51.355917', '2016-03-14 18:18:25.710599', 'images/bus/main/volvo1.jpg', 1, 1),
+(2, 'Jyoti travels', 'jyoti-travels', 'A Destination for the New Millennium.\r\nA different light.\r\nA new point of view.\r\nA signature of excellence.\r\nA tradition of excellence.', 'AC', '06:00:00.000000', '12:00:00.000000', '500.00', 50, 1, '2016-03-14 17:07:00.968717', '2016-03-14 18:01:06.644974', 'images/bus/main/1662227372_v1.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -261,23 +266,45 @@ INSERT INTO `busrv_businfo` (`id`, `bus_name`, `slug`, `bus_description`, `type`
 -- Table structure for table `busrv_buspickarea`
 --
 
-CREATE TABLE IF NOT EXISTS `busrv_buspickarea` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `busrv_buspickarea` (
+  `id` int(11) NOT NULL,
   `area_name` varchar(50) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `created_at` datetime(6) NOT NULL,
-  `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `busrv_buspickarea`
 --
 
 INSERT INTO `busrv_buspickarea` (`id`, `area_name`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 'Borivali(east)', 'borivalieast', '2016-03-11 19:25:33.957604', '2016-03-11 19:25:33.957604'),
-(2, 'Vasai', 'vasai', '2016-03-11 19:25:41.455032', '2016-03-11 19:25:41.455032');
+(1, 'Mumbai', 'mumbai', '2016-03-11 19:25:33.957604', '2016-03-11 19:25:33.957604');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `busrv_buspickpoint`
+--
+
+CREATE TABLE `busrv_buspickpoint` (
+  `id` int(11) NOT NULL,
+  `point_name` varchar(500) NOT NULL,
+  `pincode` int(6) NOT NULL,
+  `area_id` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `busrv_buspickpoint`
+--
+
+INSERT INTO `busrv_buspickpoint` (`id`, `point_name`, `pincode`, `area_id`) VALUES
+(1, 'Borivali West', 400092, 1),
+(2, 'Churchgate', 400020, 1),
+(3, 'Dadar', 400014, 1),
+(4, 'Juhu', 400049, 1),
+(5, 'Worli', 400018, 1),
+(6, 'Kandivali West', 400067, 1);
 
 -- --------------------------------------------------------
 
@@ -285,19 +312,16 @@ INSERT INTO `busrv_buspickarea` (`id`, `area_name`, `slug`, `created_at`, `updat
 -- Table structure for table `django_admin_log`
 --
 
-CREATE TABLE IF NOT EXISTS `django_admin_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL,
   `action_time` datetime(6) NOT NULL,
   `object_id` longtext,
   `object_repr` varchar(200) NOT NULL,
-  `action_flag` smallint(5) unsigned NOT NULL,
+  `action_flag` smallint(5) UNSIGNED NOT NULL,
   `change_message` longtext NOT NULL,
   `content_type_id` int(11) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` (`content_type_id`),
-  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_admin_log`
@@ -322,13 +346,11 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 -- Table structure for table `django_content_type`
 --
 
-CREATE TABLE IF NOT EXISTS `django_content_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL,
   `app_label` varchar(100) NOT NULL,
-  `model` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `model` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_content_type`
@@ -352,13 +374,12 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- Table structure for table `django_migrations`
 --
 
-CREATE TABLE IF NOT EXISTS `django_migrations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL,
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `applied` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `applied` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `django_migrations`
@@ -386,12 +407,10 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 -- Table structure for table `django_session`
 --
 
-CREATE TABLE IF NOT EXISTS `django_session` (
+CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
-  `expire_date` datetime(6) NOT NULL,
-  PRIMARY KEY (`session_key`),
-  KEY `django_session_de54fa62` (`expire_date`)
+  `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -401,8 +420,222 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('1adt4sc2cq3frge92qlgvj0d6t042xhk', 'OWM3NGNkYjIwYWEwMjE1NGM0ZjFhNDc3ZWU0ZGNkMmEwMWVhZjQ3NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI3ZjQ0NWIxNTdhNmIyZDAwMDQ1NjAzODc4ZGNkZDkyNzdlNWI1NjFmIn0=', '2016-04-07 14:51:31.633972'),
 ('1vtddpjeimvm18xtzknj4zgu9kn6e8tf', 'OWM3NGNkYjIwYWEwMjE1NGM0ZjFhNDc3ZWU0ZGNkMmEwMWVhZjQ3NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI3ZjQ0NWIxNTdhNmIyZDAwMDQ1NjAzODc4ZGNkZDkyNzdlNWI1NjFmIn0=', '2016-04-03 16:28:26.322242'),
+('m88xe85bmh4ob50zfjloooxlz6wmhl8o', 'ZTM1MzhiNDUyOTdiZjVjMjc2OTU4OTFmYWUwNmE2MmUzMTQzYzE0YTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEyYjA2YjFkMTA3ZGQ1N2VjMzA0NmQ3M2VkNGNjY2FkOTg1YjM5NTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI1In0=', '2017-04-05 13:53:13.163277'),
 ('ncaq5cfbbs6qi600fto7gj8jf08b4n2p', 'Mzk5MzMyOTA5YWVjOTVkYTU4YzBlOTAwNDdjM2U5YThjNjY3NzczZTp7Il9hdXRoX3VzZXJfaGFzaCI6IjdmNDQ1YjE1N2E2YjJkMDAwNDU2MDM4NzhkY2RkOTI3N2U1YjU2MWYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2016-03-29 19:18:08.098672');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `geom`
+--
+
+CREATE TABLE `geom` (
+  `g` geometry DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `auth_group`
+--
+ALTER TABLE `auth_group`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_group_permissions_group_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  ADD KEY `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` (`permission_id`);
+
+--
+-- Indexes for table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_permission_content_type_id_01ab375a_uniq` (`content_type_id`,`codename`);
+
+--
+-- Indexes for table `auth_user`
+--
+ALTER TABLE `auth_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indexes for table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_groups_user_id_94350c0c_uniq` (`user_id`,`group_id`),
+  ADD KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`);
+
+--
+-- Indexes for table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_user_permissions_user_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  ADD KEY `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` (`permission_id`);
+
+--
+-- Indexes for table `bookticket_bookaticket`
+--
+ALTER TABLE `bookticket_bookaticket`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookTicket_bookaticket_bus_id_7f7e68e1_fk_busrv_busInfo_id` (`bus_id`),
+  ADD KEY `bookTicket_bookaticket_user_id_398ddaae_fk_auth_user_id` (`user_id`),
+  ADD KEY `pickpoint_id` (`pickpoint_id`,`droppoint_id`),
+  ADD KEY `droppoint_id` (`droppoint_id`);
+
+--
+-- Indexes for table `busrv_busdroparea`
+--
+ALTER TABLE `busrv_busdroparea`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexes for table `busrv_busdroppoint`
+--
+ALTER TABLE `busrv_busdroppoint`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `area_id` (`area_id`);
+
+--
+-- Indexes for table `busrv_businfo`
+--
+ALTER TABLE `busrv_businfo`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `busrv_busInfo_4a888a93` (`arriving_from_id`),
+  ADD KEY `busrv_busInfo_16dac3c0` (`depature_at_id`);
+
+--
+-- Indexes for table `busrv_buspickarea`
+--
+ALTER TABLE `busrv_buspickarea`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexes for table `busrv_buspickpoint`
+--
+ALTER TABLE `busrv_buspickpoint`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `area_id` (`area_id`);
+
+--
+-- Indexes for table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` (`content_type_id`),
+  ADD KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`);
+
+--
+-- Indexes for table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `django_content_type_app_label_76bd3d3b_uniq` (`app_label`,`model`);
+
+--
+-- Indexes for table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `django_session`
+--
+ALTER TABLE `django_session`
+  ADD PRIMARY KEY (`session_key`),
+  ADD KEY `django_session_de54fa62` (`expire_date`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `auth_group`
+--
+ALTER TABLE `auth_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `auth_user`
+--
+ALTER TABLE `auth_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `bookticket_bookaticket`
+--
+ALTER TABLE `bookticket_bookaticket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `busrv_busdroparea`
+--
+ALTER TABLE `busrv_busdroparea`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `busrv_busdroppoint`
+--
+ALTER TABLE `busrv_busdroppoint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `busrv_businfo`
+--
+ALTER TABLE `busrv_businfo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `busrv_buspickarea`
+--
+ALTER TABLE `busrv_buspickarea`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `busrv_buspickpoint`
+--
+ALTER TABLE `busrv_buspickpoint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -411,8 +644,8 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 -- Constraints for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
-  ADD CONSTRAINT `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
+  ADD CONSTRAINT `auth_group_permissi_permission_id_84c5c92e_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
 
 --
 -- Constraints for table `auth_permission`
@@ -431,15 +664,23 @@ ALTER TABLE `auth_user_groups`
 -- Constraints for table `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
-  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  ADD CONSTRAINT `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
+  ADD CONSTRAINT `auth_user_user_perm_permission_id_1fbb5f2c_fk_auth_permission_id` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Constraints for table `bookticket_bookaticket`
 --
 ALTER TABLE `bookticket_bookaticket`
   ADD CONSTRAINT `bookTicket_bookaticket_bus_id_7f7e68e1_fk_busrv_busInfo_id` FOREIGN KEY (`bus_id`) REFERENCES `busrv_businfo` (`id`),
-  ADD CONSTRAINT `bookTicket_bookaticket_user_id_398ddaae_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+  ADD CONSTRAINT `bookTicket_bookaticket_user_id_398ddaae_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  ADD CONSTRAINT `bookticket_bookaticket_ibfk_1` FOREIGN KEY (`pickpoint_id`) REFERENCES `busrv_buspickpoint` (`id`),
+  ADD CONSTRAINT `bookticket_bookaticket_ibfk_2` FOREIGN KEY (`droppoint_id`) REFERENCES `busrv_busdroppoint` (`id`);
+
+--
+-- Constraints for table `busrv_busdroppoint`
+--
+ALTER TABLE `busrv_busdroppoint`
+  ADD CONSTRAINT `busrv_busdroppoint_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `busrv_busdroparea` (`id`);
 
 --
 -- Constraints for table `busrv_businfo`
@@ -449,11 +690,17 @@ ALTER TABLE `busrv_businfo`
   ADD CONSTRAINT `busrv_busInfo_depature_at_id_9b5e909b_fk_busrv_busDropArea_id` FOREIGN KEY (`depature_at_id`) REFERENCES `busrv_busdroparea` (`id`);
 
 --
+-- Constraints for table `busrv_buspickpoint`
+--
+ALTER TABLE `busrv_buspickpoint`
+  ADD CONSTRAINT `busrv_buspickpoint_ibfk_1` FOREIGN KEY (`area_id`) REFERENCES `busrv_buspickarea` (`id`);
+
+--
 -- Constraints for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  ADD CONSTRAINT `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
+  ADD CONSTRAINT `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -26,8 +26,8 @@ class bookAticket(models.Model):
     booking_seats_num =models.IntegerField(default=1)
     fare = models.DecimalField(max_digits=9,decimal_places=2)
     
-    pickpoint = models.ForeignKey(BusDropPoint, models.DO_NOTHING)
-    droppoint = models.ForeignKey(BusPickPoint, models.DO_NOTHING)
+    pickpoint = models.ForeignKey(BusPickPoint, models.DO_NOTHING)
+    droppoint = models.ForeignKey(BusDropPoint, models.DO_NOTHING)
 
     class Meta:
         db_table='bookticket_bookaticket'

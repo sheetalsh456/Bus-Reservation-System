@@ -20,12 +20,16 @@
                         		<img src="{% static 'images/homepage/icon1.png'%}" width=70 /><br/>
                         		</td>
                         		<td>
-                        		Destination :<br/><br/> 
-                        		Departure :
+                        		Destination : <br/>
+                                Drop Point : <br/> 
+                        		Departure :  <br/> 
+                                Pickup Point : <br/> 
                         		</td>
                         		<td>
-                        		{{bus_arrive.area_name}}<br/><br/> 
-                        		{{bus_depart.area_name}}
+                        		{{bus_arrive.area_name}}<br/>
+                                {{tickets.droppoint.drop_point}}<br/>
+                        		{{bus_depart.area_name}}<br/> 
+                                {{tickets.pickpoint.point_name}}
                         		</td>
                         	</tr>
                         	<tr>
